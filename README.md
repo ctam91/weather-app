@@ -1,5 +1,4 @@
 # weather-app
-Simple weather app 
 ===================================
 
 This app weather conditions using Open Weather Map API
