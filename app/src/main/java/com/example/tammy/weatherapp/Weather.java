@@ -25,4 +25,8 @@ public class Weather {
     public double getTemp() {
         return mTemp;
     }
+
+    public void setTemp(double temp) {
+        this.mTemp = temp;
+    }
 }
