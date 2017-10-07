@@ -1,6 +1,11 @@
 package com.example.tammy.weatherapp;
 
+import android.text.TextUtils;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tammy on 10/6/2017.
@@ -58,11 +65,11 @@ public final class QueryUtils {
      */
 
     private static String makeHttpRequest(URL url) throws IOException {
-        String jsonRsponse = "";
+        String jsonResponse = "";
 
         // if the url is null, return early
         if(url == null){
-            return jsonRsponse;
+            return jsonResponse;
         }
 
         HttpURLConnection urlConnection = null;
@@ -77,7 +84,7 @@ public final class QueryUtils {
 
             if(urlConnection.getResponseCode() == 200){
                 inputStream = urlConnection.getInputStream();
-                jsonRsponse = readFromStream(inputStream);
+                jsonResponse = readFromStream(inputStream);
             } else{
                 Log.e("Error", "Error response code" + urlConnection.getResponseCode());
             }
@@ -91,8 +98,64 @@ public final class QueryUtils {
                 inputStream.close();
             }
         }
-        return jsonRsponse;
+        return jsonResponse;
     }
 
+    /**
+     * Parse JSON response
+     * @param weatherJSON the JSON data
+     * @return list of weather objects from JSON
+     */
+    private static ArrayList<Weather> extractWeatherData(String weatherJSON){
+
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(weatherJSON)) {
+            return null;
+        }
+
+        ArrayList<Weather> weathers = new ArrayList<>();
+
+        try {
+            JSONObject weatherData = new JSONObject(weatherJSON);
+            JSONArray weatherListArray = weatherData.getJSONArray("list");
+
+            for(int i = 0; i < weatherListArray.length(); i++){
+                JSONObject firstWeather = weatherListArray.getJSONObject(i);
+                JSONObject main = firstWeather.getJSONObject("main");
+
+                Double temp = main.getDouble("temp");
+                String city = "London";
+
+                weathers.add(new Weather(city, temp));
+
+            }
+
+        } catch (JSONException e) {
+            Log.e("QueryUtils", "Problem parsing the weather JSON results", e);
+            e.printStackTrace();
+        }
+
+        return weathers;
+    }
+
+        /*
+        Retrieve Earthquake Data from API
+     */
+
+    public static List<Weather> fetchWeatherData(String requestUrl){
+        // Create URL object
+        URL url = createUrl(requestUrl);
+
+        // Perform HTTP request
+        String jsonResponse = null;
+        try{
+            jsonResponse = makeHttpRequest(url);
+        } catch(IOException e){
+            Log.e("Error","Problem making the HTTP request", e);
+        }
+        // Extract relevant field from JSON response and add it to an Earthquake List
+        List<Weather> weathers = extractWeatherData(jsonResponse);
+        return weathers;
+    }
 
 }
