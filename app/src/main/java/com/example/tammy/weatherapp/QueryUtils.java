@@ -63,7 +63,6 @@ public final class QueryUtils {
     /**
      * Establish a network connection. Make an HTTP request to the given URL and return a String as the response.
      */
-
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
@@ -90,7 +89,6 @@ public final class QueryUtils {
             }
         } catch (IOException e) {
             Log.e("Error", "Problem returning the JSON information");
-            e.printStackTrace();
         } finally {
             if(urlConnection != null ){
                 urlConnection.disconnect();
@@ -117,10 +115,10 @@ public final class QueryUtils {
 
         try {
             JSONObject weatherData = new JSONObject(weatherJSON);
-            JSONArray weatherListArray = weatherData.getJSONArray("list");
+            JSONArray weatherArray = weatherData.getJSONArray("list");
 
-            for(int i = 0; i < weatherListArray.length(); i++){
-                JSONObject firstWeather = weatherListArray.getJSONObject(i);
+            for(int i = 0; i < weatherArray.length(); i++){
+                JSONObject firstWeather = weatherArray.getJSONObject(i);
                 JSONObject main = firstWeather.getJSONObject("main");
 
                 Double temp = main.getDouble("temp");
@@ -132,7 +130,6 @@ public final class QueryUtils {
 
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the weather JSON results", e);
-            e.printStackTrace();
         }
 
         return weathers;
