@@ -15,7 +15,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     //URL for data from the Open Weather Map dataset
     private static final String BASE_URL =
-            "http://samples.openweathermap.org/data/2.5/forecast?q=seattle,wa&appid=";
+            "http://openweathermap.org/data/2.5/forecast?id=5809844&appid=";
 
     private static final String appId = "b1b15e88fa797225412429c1c50c122a1";
 

@@ -33,16 +33,24 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         Weather currentWeather= getItem(position);
 
         // Create a new Date object from the time in milliseconds and set date textview
-        Date dateObject = new Date(currentWeather.getTimeInMilliseconds()*1000);
-        String formattedDate = formatDate(dateObject);
-        TextView dateView = (TextView) listItemView.findViewById(R.id.date);
-        dateView.setText(formattedDate);
+        Long newDate = null;
+        if (currentWeather != null) {
+            newDate = currentWeather.getTimeInMilliseconds()*1000;
 
-        // Set temperature textview
-        TextView temp = (TextView) listItemView.findViewById(R.id.temp);
-        String currentTemp = formatTemp(currentWeather.getTemp());
-        temp.setText(String.valueOf(currentTemp));
+            Date dateObject = new Date(newDate);
+            String formattedDate = formatDate(dateObject);
+            TextView dateView = (TextView) listItemView.findViewById(R.id.date);
+            dateView.setText(formattedDate);
 
+            TextView timeView = (TextView) listItemView.findViewById(R.id.time);
+            String formattedTime = formatTime(dateObject);
+            timeView.setText(formattedTime);
+
+            // Set temperature textview
+            TextView temp = (TextView) listItemView.findViewById(R.id.temp);
+            String currentTemp = formatTemp(currentWeather.getTemp());
+            temp.setText(String.valueOf(currentTemp));
+        }
         return listItemView;
     }
 
@@ -54,8 +62,17 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         return dateFormat.format(dateObject);
     }
 
-    private String formatTemp(Double tempK){
-        Double fTemp = (9.0/5)*(tempK - 273) + 32.0;
+    /**
+     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
+     */
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return timeFormat.format(dateObject);
+    }
+
+
+    private String formatTemp(Double tempC){
+        Double fTemp = tempC * (9.0/5) + 32.0;
         DecimalFormat fTempFormatted = new DecimalFormat("0.0");
         return fTempFormatted.format(fTemp);
     }
