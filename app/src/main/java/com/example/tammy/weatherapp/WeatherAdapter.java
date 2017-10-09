@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,15 +32,32 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         }
         Weather currentWeather= getItem(position);
 
-        TextView city = (TextView) listItemView.findViewById(R.id.city);
-        String currentCity = currentWeather.getCity();
-        city.setText(currentCity);
+        // Create a new Date object from the time in milliseconds and set date textview
+        Date dateObject = new Date(currentWeather.getTimeInMilliseconds()*1000);
+        String formattedDate = formatDate(dateObject);
+        TextView dateView = (TextView) listItemView.findViewById(R.id.date);
+        dateView.setText(formattedDate);
 
-
+        // Set temperature textview
         TextView temp = (TextView) listItemView.findViewById(R.id.temp);
-        Double currentTemp = currentWeather.getTemp();
+        String currentTemp = formatTemp(currentWeather.getTemp());
         temp.setText(String.valueOf(currentTemp));
 
         return listItemView;
     }
+
+    /**
+     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+     */
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
+        return dateFormat.format(dateObject);
+    }
+
+    private String formatTemp(Double tempK){
+        Double fTemp = (9.0/5)*(tempK - 273) + 32.0;
+        DecimalFormat fTempFormatted = new DecimalFormat("0.0");
+        return fTempFormatted.format(fTemp);
+    }
+
 }

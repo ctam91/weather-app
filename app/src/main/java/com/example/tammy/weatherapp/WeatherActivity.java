@@ -15,9 +15,9 @@ public class WeatherActivity extends AppCompatActivity {
 
     //URL for data from the Open Weather Map dataset
     private static final String BASE_URL =
-            "http://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=";
+            "http://samples.openweathermap.org/data/2.5/forecast?q=seattle,wa&appid=";
 
-    private static final String appId = "e96c0c2ddd5f0f8a95124daeee861921";
+    private static final String appId = "b1b15e88fa797225412429c1c50c122a1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

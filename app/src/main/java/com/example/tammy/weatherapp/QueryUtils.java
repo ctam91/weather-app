@@ -119,12 +119,16 @@ public final class QueryUtils {
 
             for(int i = 0; i < weatherArray.length(); i++){
                 JSONObject firstWeather = weatherArray.getJSONObject(i);
+
+                // Find the date from the JSON response
+                Long date = firstWeather.getLong("dt");
+
+                // Find the temp from the JSON response
                 JSONObject main = firstWeather.getJSONObject("main");
-
                 Double temp = main.getDouble("temp");
-                String city = "London";
 
-                weathers.add(new Weather(city, temp));
+                // Add new Weather object to weathers arraylist
+                weathers.add(new Weather(temp, date));
 
             }
 
