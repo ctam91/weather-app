@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:minHeight="88dp"
+    android:orientation="horizontal"
+    android:drawSelectorOnTop="true">
 
-    <TextView
-        android:id="@+id/date"
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:id="@+id/list_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="88dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/time"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:text="Time" />
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:text="Date" />
 
-    <TextView
-        android:id="@+id/temp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Temp" />
+
+    </LinearLayout>
+
 </LinearLayout>

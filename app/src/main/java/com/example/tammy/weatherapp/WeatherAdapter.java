@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -50,6 +51,9 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
             TextView temp = (TextView) listItemView.findViewById(R.id.temp);
             String currentTemp = formatTemp(currentWeather.getTemp());
             temp.setText(String.valueOf(currentTemp));
+
+            ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+            imageView.setImageResource(R.drawable.sun);
         }
         return listItemView;
     }
@@ -75,6 +79,10 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         Double fTemp = tempC * (9.0/5) + 32.0;
         DecimalFormat fTempFormatted = new DecimalFormat("0.0");
         return fTempFormatted.format(fTemp);
+    }
+
+    private String checkWeather(String weatherType){
+        return null;
     }
 
 }
