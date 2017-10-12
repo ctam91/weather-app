@@ -18,25 +18,35 @@
         android:id="@+id/list_row"
         android:layout_width="match_parent"
         android:layout_height="88dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/time"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            tools:text="Time" />
+            android:layout_weight="0"
+            tools:text="Time"
+            android:layout_marginRight="10sp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/date"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            tools:text="Date" />
+            android:layout_weight="0"
+            tools:text="Date"
+            android:layout_marginRight="10sp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/temp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Temp" />
+            android:layout_weight="0"
+            tools:text="Temp"
+            android:layout_marginRight="10sp"
+            android:layout_gravity="center"
+            android:gravity="right"/>
 
     </LinearLayout>
 
