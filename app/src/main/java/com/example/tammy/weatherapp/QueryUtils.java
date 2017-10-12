@@ -127,6 +127,10 @@ public final class QueryUtils {
                 JSONObject main = firstWeather.getJSONObject("main");
                 Double temp = main.getDouble("temp");
 
+                JSONArray weather_description = firstWeather.getJSONArray("weather");
+                JSONObject my_weather = weather_description.getJSONObject(0);
+                String description = my_weather.getString("description");
+
                 // Add new Weather object to weathers arraylist
                 weathers.add(new Weather(temp, date));
 
