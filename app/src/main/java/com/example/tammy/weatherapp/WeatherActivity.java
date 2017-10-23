@@ -3,7 +3,11 @@ package com.example.tammy.weatherapp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -16,11 +20,12 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        WeatherAsyncTask task = new WeatherAsyncTask();
+        task.execute(BASE_URL);
+        Log.v("Step", "task succesfully executed");
     }
 
-    private class WeatherTask extends AsyncTask<Weather, Void, Weather> {
+    private class WeatherAsyncTask extends AsyncTask<Weather, Void, Weather> {
 
         @Override
         protected Weather doInBackground(Weather... urls) {
