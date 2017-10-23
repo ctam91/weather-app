@@ -1,7 +1,9 @@
 package com.example.tammy.weatherapp;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -16,5 +18,21 @@ public class WeatherActivity extends AppCompatActivity {
 
     }
 
+    private class WeatherTask extends AsyncTask<Weather, Void, Weather> {
+
+        @Override
+        protected Weather doInBackground(Weather ... urls) {
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+            Weather theWeather = QueryUtils.fetchWeatherData(BASE_URL);
+            return theWeather;
+        }
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            Double temp =
+        }
 
 }

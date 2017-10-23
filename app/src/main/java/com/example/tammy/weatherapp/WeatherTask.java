@@ -4,20 +4,21 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by tammy on 10/23/2017.
  */
 
-public class WeatherTask extends AsyncTask {
+public class WeatherTask extends AsyncTask<Weather, Void, Weather> {
 
     @Override
-    protected Object doInBackground(Object[] params) {
-
-
-        return null;
+    protected Weather doInBackground(Weather ... urls) {
+        if (urls.length < 1 || urls[0] == null) {
+            return null;
+        }
+        Weather theWeather = QueryUtils.fetchWeatherData(urls[0]);
+        return theWeather;
     }
 
     @Override
@@ -29,21 +30,8 @@ public class WeatherTask extends AsyncTask {
         temp.setText(String.valueOf(currentTemp));
     }
 
-    /**
-     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
-     */
-    private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
-        return dateFormat.format(dateObject);
-    }
 
-    /**
-     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
-     */
-    private String formatTime(Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
-    }
+
 
 
     private String formatTemp(Double tempC){

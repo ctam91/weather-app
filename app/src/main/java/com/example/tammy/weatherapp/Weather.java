@@ -7,9 +7,11 @@ package com.example.tammy.weatherapp;
 public class Weather {
 
     private double mTemp;
+    private String mName;
 
-    public Weather(double temp) {
+    public Weather(double temp, String name) {
         this.mTemp = temp;
+        this.mName = name;
     }
 
 
@@ -21,4 +23,11 @@ public class Weather {
         this.mTemp = temp;
     }
 
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String mName) {
+        this.mName = mName;
+    }
 }
