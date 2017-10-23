@@ -117,6 +117,9 @@ public final class QueryUtils {
             Double temp = main.getDouble(0);
             String placeName = weatherData.getString("name");
 
+            Weather result = new Weather(temp, placeName);
+            return result;
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
