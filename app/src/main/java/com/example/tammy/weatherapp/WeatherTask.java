@@ -1,6 +1,7 @@
 package com.example.tammy.weatherapp;
 
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -11,11 +12,21 @@ import java.util.Date;
  */
 
 public class WeatherTask extends AsyncTask {
-    private String OpenWeatherMapURl = "http://openweathermap.org/data/2.5/weather?q=Seattle,US-WA&appid=b1b15e88fa797225412429c1c50c122a1"''
 
     @Override
     protected Object doInBackground(Object[] params) {
+
+
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
+
+        TextView temp = (TextView) MainActivity.findViewById(R.id.temp);
+        String currentTemp = formatTemp(currentWeather.getTemp());
+        temp.setText(String.valueOf(currentTemp));
     }
 
     /**

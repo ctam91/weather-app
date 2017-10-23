@@ -5,13 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    private WeatherAdapter weatherAdapter;
-
     //URL for data from the Open Weather Map dataset
     private static final String BASE_URL =
-            "http://openweathermap.org/data/2.5/forecast?id=5809844&appid=";
-
-    private static final String appId = "b1b15e88fa797225412429c1c50c122a1";
+            "http://openweathermap.org/data/2.5/weather?q=Seattle,US-WA&appid=b1b15e88fa797225412429c1c50c122a1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
