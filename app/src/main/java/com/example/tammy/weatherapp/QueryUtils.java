@@ -104,46 +104,48 @@ public final class QueryUtils {
      * @param weatherJSON the JSON data
      * @return list of weather objects from JSON
      */
-    private static ArrayList<Weather> extractWeatherData(String weatherJSON){
+    private static Weather extractWeatherData(String weatherJSON){
 
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(weatherJSON)) {
             return null;
         }
 
-        ArrayList<Weather> weathers = new ArrayList<>();
+        Weather userWeather;
 
         try {
             JSONObject weatherData = new JSONObject(weatherJSON);
-            JSONArray weatherArray = weatherData.getJSONArray("list");
+            JSONArray main = weatherData.getJSONArray("main");
 
-            for(int i = 0; i < weatherArray.length(); i++){
-                JSONObject firstWeather = weatherArray.getJSONObject(i);
-
-                // Find the date from the JSON response
-                Long date = firstWeather.getLong("dt");
-
-                // Find the temp from the JSON response
-                JSONObject main = firstWeather.getJSONObject("main");
-                Double temp = main.getDouble("temp");
-
-                JSONArray weather_description = firstWeather.getJSONArray("weather");
-                JSONObject my_weather = weather_description.getJSONObject(0);
-                String description = my_weather.getString("description");
-                String weatherType = my_weather.getString("main");
-
-                // Add new Weather object to weathers arraylist
-                weathers.add(new Weather(temp, date, description, weatherType));
-
-            }
+            String temperature = main.getString("temp");
+            String placeName = weatherData.getString("name");
 
         } catch (JSONException e) {
-            Log.e("QueryUtils", "Problem parsing the weather JSON results", e);
+            e.printStackTrace();
         }
-
-        return weathers;
+        return null;
     }
 
+    JSONObject weatherData = new JSONObject(weatherJSON);
+    JSONArray weatherArray = weatherData.getJSONArray("list");
+
+            for(int i = 0; i < weatherArray.length(); i++){
+        JSONObject firstWeather = weatherArray.getJSONObject(i);
+
+        // Find the date from the JSON response
+        Long date = firstWeather.getLong("dt");
+
+        // Find the temp from the JSON response
+        JSONObject main = firstWeather.getJSONObject("main");
+        Double temp = main.getDouble("temp");
+
+        JSONArray weather_description = firstWeather.getJSONArray("weather");
+        JSONObject my_weather = weather_description.getJSONObject(0);
+        String description = my_weather.getString("description");
+        String weatherType = my_weather.getString("main");
+
+        // Add new Weather object to weathers arraylist
+        weathers.add(new Weather(temp, date, description, weatherType));
         /*
         Retrieve Earthquake Data from API
      */
