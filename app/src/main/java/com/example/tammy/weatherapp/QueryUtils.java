@@ -3,7 +3,6 @@ package com.example.tammy.weatherapp;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -109,13 +108,11 @@ public final class QueryUtils {
             return null;
         }
 
-        Weather userWeather;
-
         try {
-            JSONObject weatherData = new JSONObject(weatherJSON);
-            JSONArray main = weatherData.getJSONArray("main");
-            Double temp = main.getDouble(0);
-            String placeName = weatherData.getString("name");
+            JSONObject myObject = new JSONObject(weatherJSON);
+            JSONObject main = new JSONObject(myObject.getString("main"));
+            String temp = main.getString("temp");
+            String placeName = myObject.getString("name");
 
             Weather result = new Weather(temp, placeName);
             return result;

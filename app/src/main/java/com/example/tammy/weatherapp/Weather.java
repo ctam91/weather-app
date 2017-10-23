@@ -6,20 +6,20 @@ package com.example.tammy.weatherapp;
 
 public class Weather {
 
-    private double mTemp;
+    private String mTemp;
     private String mName;
 
-    public Weather(double temp, String name) {
+    public Weather(String temp, String name) {
         this.mTemp = temp;
         this.mName = name;
     }
 
 
-    public double getTemp() {
+    public String getTemp() {
         return mTemp;
     }
 
-    public void setTemp(double temp) {
+    public void setTemp(String temp) {
         this.mTemp = temp;
     }
 

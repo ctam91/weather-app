@@ -35,15 +35,16 @@ public class WeatherActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Weather data) {
-            super.onPostExecute(data);
-            Double temp = data.getTemp();
-            String name = data.getName();
+            if (data != null){
+                String temp = data.getTemp();
+                String name = data.getName();
 
-            TextView tempTextView = (TextView) findViewById(R.id.temp);
-            TextView nameTextView = (TextView) findViewById(R.id.location);
+                TextView tempTextView = (TextView) findViewById(R.id.temp);
+                TextView nameTextView = (TextView) findViewById(R.id.location);
 
-            tempTextView.setText(temp.toString());
-            nameTextView.setText(name);
+                tempTextView.setText(temp);
+                nameTextView.setText(name);
+            }
         }
     }
 
