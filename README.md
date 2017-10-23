@@ -1,7 +1,9 @@
 weather-app
 ===================================
 
-This app weather conditions using Open Weather Map API
+App is still in progress.
+
+This app displays weather conditions using Open Weather Map API
 
 
 More info on the Open Weather Map API available at:
