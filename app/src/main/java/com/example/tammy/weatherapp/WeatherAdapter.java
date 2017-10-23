@@ -47,13 +47,15 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
             String formattedTime = formatTime(dateObject);
             timeView.setText(formattedTime);
 
+            TextView descriptionView = (TextView) listItemView.findViewById(R.id.description);
+            descriptionView.setText(currentWeather.getDescription());
             // Set temperature textview
             TextView temp = (TextView) listItemView.findViewById(R.id.temp);
             String currentTemp = formatTemp(currentWeather.getTemp());
             temp.setText(String.valueOf(currentTemp));
 
             ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
-            imageView.setImageResource(R.drawable.sun);
+            imageView.setImageResource(getWeatherIcon(currentWeather.getWeatherType()));
         }
         return listItemView;
     }
@@ -81,8 +83,22 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         return fTempFormatted.format(fTemp);
     }
 
-    private String checkWeather(String weatherType){
-        return null;
+    private int getWeatherIcon(String weatherType){
+        int iconResourceId;
+        switch (weatherType){
+            case "Clear":
+                iconResourceId = R.drawable.sun;
+                break;
+            case "Rain":
+                iconResourceId = R.drawable.rain;
+                break;
+            case "Clouds":
+                iconResourceId = R.drawable.cloudy;
+                break;
+            default:
+                iconResourceId = R.drawable.umbrella;
+        }
+        return iconResourceId;
     }
 
 }

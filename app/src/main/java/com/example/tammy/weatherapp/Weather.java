@@ -8,10 +8,14 @@ public class Weather {
 
     private double mTemp;
     private Long mTimeInMilliseconds;
+    private String mDescription;
+    private String mWeatherType;
 
-    public Weather(double temp, Long date) {
+    public Weather(double temp, Long date, String description, String weatherType) {
         this.mTemp = temp;
         this.mTimeInMilliseconds = date;
+        this.mDescription = description;
+        this.mWeatherType = weatherType;
     }
 
 
@@ -29,5 +33,17 @@ public class Weather {
 
     public void setTimeInMilliseconds(Long mTimeInMilliseconds) {
         this.mTimeInMilliseconds = mTimeInMilliseconds;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public String getWeatherType(){
+        return mWeatherType;
     }
 }
