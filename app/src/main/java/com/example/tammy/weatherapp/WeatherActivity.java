@@ -16,23 +16,32 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
     }
 
     private class WeatherTask extends AsyncTask<Weather, Void, Weather> {
 
         @Override
-        protected Weather doInBackground(Weather ... urls) {
+        protected Weather doInBackground(Weather... urls) {
             if (urls.length < 1 || urls[0] == null) {
                 return null;
             }
             Weather theWeather = QueryUtils.fetchWeatherData(BASE_URL);
             return theWeather;
         }
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
 
-            Double temp =
+        @Override
+        protected void onPostExecute(Weather data) {
+            Double temp = data.getTemp();
+            String name = data.getName();
+
+            TextView tempTextView = (TextView) findViewById(R.id.temp);
+            TextView nameTextView = (TextView) findViewById(R.id.location);
+
+            tempTextView.setText(temp.toString());
+            nameTextView.setText(name);
         }
+    }
 
 }
