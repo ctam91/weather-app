@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,15 +33,72 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         }
         Weather currentWeather= getItem(position);
 
-        TextView city = (TextView) listItemView.findViewById(R.id.city);
-        String currentCity = currentWeather.getCity();
-        city.setText(currentCity);
+        // Create a new Date object from the time in milliseconds and set date textview
+        Long newDate = null;
+        if (currentWeather != null) {
+            newDate = currentWeather.getTimeInMilliseconds()*1000;
 
+            Date dateObject = new Date(newDate);
+            String formattedDate = formatDate(dateObject);
+            TextView dateView = (TextView) listItemView.findViewById(R.id.date);
+            dateView.setText(formattedDate);
 
-        TextView temp = (TextView) listItemView.findViewById(R.id.temp);
-        Double currentTemp = currentWeather.getTemp();
-        temp.setText(String.valueOf(currentTemp));
+            TextView timeView = (TextView) listItemView.findViewById(R.id.time);
+            String formattedTime = formatTime(dateObject);
+            timeView.setText(formattedTime);
 
+            TextView descriptionView = (TextView) listItemView.findViewById(R.id.description);
+            descriptionView.setText(currentWeather.getDescription());
+            // Set temperature textview
+            TextView temp = (TextView) listItemView.findViewById(R.id.temp);
+            String currentTemp = formatTemp(currentWeather.getTemp());
+            temp.setText(String.valueOf(currentTemp));
+
+            ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+            imageView.setImageResource(getWeatherIcon(currentWeather.getWeatherType()));
+        }
         return listItemView;
     }
+
+    /**
+     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+     */
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
+        return dateFormat.format(dateObject);
+    }
+
+    /**
+     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
+     */
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return timeFormat.format(dateObject);
+    }
+
+
+    private String formatTemp(Double tempC){
+        Double fTemp = tempC * (9.0/5) + 32.0;
+        DecimalFormat fTempFormatted = new DecimalFormat("0.0");
+        return fTempFormatted.format(fTemp);
+    }
+
+    private int getWeatherIcon(String weatherType){
+        int iconResourceId;
+        switch (weatherType){
+            case "Clear":
+                iconResourceId = R.drawable.sun;
+                break;
+            case "Rain":
+                iconResourceId = R.drawable.rain;
+                break;
+            case "Clouds":
+                iconResourceId = R.drawable.cloudy;
+                break;
+            default:
+                iconResourceId = R.drawable.umbrella;
+        }
+        return iconResourceId;
+    }
+
 }
