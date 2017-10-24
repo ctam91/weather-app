@@ -170,4 +170,23 @@ public final class QueryUtils {
         return fTempFormatted.format(fTemp);
     }
 
+    private int getWeatherIcon(String weatherType){
+        int iconResourceId;
+        switch (weatherType){
+            case "Clear":
+                iconResourceId = R.drawable.sun;
+                break;
+            case "Rain":
+                iconResourceId = R.drawable.rain;
+                break;
+            case "Clouds":
+                iconResourceId = R.drawable.cloudy;
+                break;
+            default:
+                iconResourceId = R.drawable.umbrella;
+        }
+        return iconResourceId;
+    }
+
+
 }
