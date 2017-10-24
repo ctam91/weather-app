@@ -38,6 +38,7 @@ public class WeatherActivity extends AppCompatActivity {
             if (data != null){
                 String temp = data.getTemp();
                 String name = data.getName();
+                Long 
 
                 TextView tempTextView = (TextView) findViewById(R.id.temp);
                 TextView nameTextView = (TextView) findViewById(R.id.location);
