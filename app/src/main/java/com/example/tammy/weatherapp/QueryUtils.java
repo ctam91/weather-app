@@ -112,9 +112,10 @@ public final class QueryUtils {
             JSONObject myObject = new JSONObject(weatherJSON);
             JSONObject main = new JSONObject(myObject.getString("main"));
             String temp = main.getString("temp");
+            Long date = myObject.getLong("dt");
             String placeName = myObject.getString("name");
 
-            Weather result = new Weather(temp, placeName);
+            Weather result = new Weather(temp, placeName, date);
             return result;
 
         } catch (JSONException e) {

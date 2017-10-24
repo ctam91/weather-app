@@ -8,10 +8,12 @@ public class Weather {
 
     private String mTemp;
     private String mName;
+    private Long mDate;
 
-    public Weather(String temp, String name) {
+    public Weather(String temp, String name, Long date) {
         this.mTemp = temp;
         this.mName = name;
+        this.mDate = date;
     }
 
 
@@ -29,5 +31,13 @@ public class Weather {
 
     public void setName(String mName) {
         this.mName = mName;
+    }
+
+    public Long getDate() {
+        return mDate;
+    }
+
+    public void setDate(Long mDate) {
+        this.mDate = mDate;
     }
 }

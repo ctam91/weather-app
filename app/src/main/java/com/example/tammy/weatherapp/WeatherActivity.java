@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class WeatherActivity extends AppCompatActivity {
 
     //URL for data from the Open Weather Map dataset
-    private static final String BASE_URL =
+    private static final String API_URL =
             "http://openweathermap.org/data/2.5/weather?q=Seattle,US-WA&appid=b1b15e88fa797225412429c1c50c122a1";
 
     @Override
@@ -18,7 +18,7 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         WeatherAsyncTask task = new WeatherAsyncTask();
-        task.execute(BASE_URL);
+        task.execute(API_URL);
         Log.v("Step", "task succesfully executed");
     }
 
