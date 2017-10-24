@@ -6,31 +6,25 @@ package com.example.tammy.weatherapp;
 
 public class Weather {
 
-    private String mTemp;
-    private String mName;
+    private double mTemp;
     private Long mTimeInMilliseconds;
+    private String mDescription;
+    private String mWeatherType;
 
-    public Weather(String temp, String name, Long timeInMilliseconds) {
+    public Weather(double temp, Long date, String description, String weatherType) {
         this.mTemp = temp;
-        this.mName = name;
-        this.mTimeInMilliseconds = timeInMilliseconds;
+        this.mTimeInMilliseconds = date;
+        this.mDescription = description;
+        this.mWeatherType = weatherType;
     }
 
 
-    public String getTemp() {
+    public double getTemp() {
         return mTemp;
     }
 
-    public void setTemp(String temp) {
+    public void setTemp(double temp) {
         this.mTemp = temp;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String mName) {
-        this.mName = mName;
     }
 
     public Long getTimeInMilliseconds() {
@@ -39,5 +33,17 @@ public class Weather {
 
     public void setTimeInMilliseconds(Long mTimeInMilliseconds) {
         this.mTimeInMilliseconds = mTimeInMilliseconds;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public String getWeatherType(){
+        return mWeatherType;
     }
 }
