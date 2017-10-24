@@ -116,7 +116,6 @@ public final class QueryUtils {
             JSONObject main = new JSONObject(myObject.getString("main"));
             String temp = main.getString("temp");
             Long date = myObject.getLong("dt");
-            String formattedDate = formatDate(date);
             String placeName = myObject.getString("name");
 
             Weather result = new Weather(temp, placeName, date);
@@ -151,7 +150,7 @@ public final class QueryUtils {
     /**
      * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
      */
-    private static String formatDate(Date dateObject) {
+   public static String formatDate(Date dateObject) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
         return dateFormat.format(dateObject);
     }
@@ -159,13 +158,13 @@ public final class QueryUtils {
     /**
      * Return the formatted date string (i.e. "4:30 PM") from a Date object.
      */
-    private static String formatTime(Date dateObject) {
+    public static String formatTime(Date dateObject) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
         return timeFormat.format(dateObject);
     }
 
 
-    private static String formatTemp(Double tempC){
+    public static String formatTemp(Double tempC){
         Double fTemp = tempC * (9.0/5) + 32.0;
         DecimalFormat fTempFormatted = new DecimalFormat("0.0");
         return fTempFormatted.format(fTemp);

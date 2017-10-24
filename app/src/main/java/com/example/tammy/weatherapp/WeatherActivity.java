@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.util.Date;
+
+import static com.example.tammy.weatherapp.R.id.temp;
+
 public class WeatherActivity extends AppCompatActivity {
 
     //URL for data from the Open Weather Map dataset
@@ -36,15 +40,22 @@ public class WeatherActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Weather data) {
             if (data != null){
-                String temp = data.getTemp();
+                String tempC = data.getTemp();
+                String tempF = QueryUtils.formatTemp(Double.parseDouble(tempC));
+
                 String name = data.getName();
-                Long 
 
-                TextView tempTextView = (TextView) findViewById(R.id.temp);
+                Long newDate = data.getTimeInMilliseconds()*1000;
+                Date dateObject = new Date(newDate);
+                String formattedDate = QueryUtils.formatDate(dateObject);
+
+                TextView tempTextView = (TextView) findViewById(temp);
                 TextView nameTextView = (TextView) findViewById(R.id.location);
+                TextView dateView = (TextView) findViewById(R.id.date);
 
-                tempTextView.setText(temp);
+                tempTextView.setText(tempF);
                 nameTextView.setText(name);
+                dateView.setText(formattedDate);
             }
         }
     }

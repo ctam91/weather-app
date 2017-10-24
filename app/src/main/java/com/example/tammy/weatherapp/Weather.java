@@ -8,12 +8,12 @@ public class Weather {
 
     private String mTemp;
     private String mName;
-    private Long mDate;
+    private Long mTimeInMilliseconds;
 
-    public Weather(String temp, String name, Long date) {
+    public Weather(String temp, String name, Long timeInMilliseconds) {
         this.mTemp = temp;
         this.mName = name;
-        this.mDate = date;
+        this.mTimeInMilliseconds = timeInMilliseconds;
     }
 
 
@@ -33,11 +33,11 @@ public class Weather {
         this.mName = mName;
     }
 
-    public Long getDate() {
-        return mDate;
+    public Long getTimeInMilliseconds() {
+        return mTimeInMilliseconds;
     }
 
-    public void setDate(Long mDate) {
-        this.mDate = mDate;
+    public void setTimeInMilliseconds(Long mTimeInMilliseconds) {
+        this.mTimeInMilliseconds = mTimeInMilliseconds;
     }
 }
